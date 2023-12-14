@@ -3,7 +3,7 @@ import TodoList from "./components/TodoList";
 import { Todo } from "./types";
 import { Form, Input, Button, List } from "antd";
 import styles from "./App.module.css";
-// import "antd/dist/antd.css";
+import 'antd/dist/reset.css';
 
 const App = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
