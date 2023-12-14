@@ -1,6 +1,6 @@
 import React from "react";
 import { Todo } from "../../types";
-import styles from "./TodoItem.css";
+import styles from "./TodoItem.module.css";
 
 interface TodoItemProps {
   todo: Todo;
@@ -9,7 +9,7 @@ interface TodoItemProps {
 
 const TodoItem = ({ todo, toggleTodo }: TodoItemProps) => {
   return (
-    <li className={todo.completed && styles.completed}>
+    <li className={todo.completed ? styles.completed : ""}>
       {todo.text}
       <button onClick={() => toggleTodo(todo.id)}>
         {todo.completed ? "Mark as incomplete" : "Mark as complete"}
