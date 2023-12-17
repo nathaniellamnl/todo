@@ -8,9 +8,15 @@ interface TodoItemProps {
   item?: Todo;
   isModalOpen: boolean;
   handleSubmit: (value: { name: string }) => void;
+  handleClose: () => void;
 }
 
-const TodoModal = ({ item, isModalOpen, handleSubmit }: TodoItemProps) => {
+const TodoModal = ({
+  item,
+  isModalOpen,
+  handleSubmit,
+  handleClose,
+}: TodoItemProps) => {
   const submitButtonRef = useRef<HTMLElement>(null);
   const type = item ? "update" : "create";
 
@@ -27,8 +33,11 @@ const TodoModal = ({ item, isModalOpen, handleSubmit }: TodoItemProps) => {
           >
             {type === "update" ? "Update todo" : "Add todo"}
           </Button>,
-          <Button key="cancel-button">Cancel</Button>,
+          <Button key="cancel-button" onClick={handleClose}>
+            Cancel
+          </Button>,
         ]}
+        onCancel={handleClose}
       >
         <Form onFinish={handleSubmit}>
           <Form.Item

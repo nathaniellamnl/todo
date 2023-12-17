@@ -43,7 +43,11 @@ const TodoContainer = () => {
         Add Todo
       </Button>
       <TodoList />
-      <TodoModal isModalOpen={isModalOpen} handleSubmit={handleSubmit} />
+      <TodoModal
+        isModalOpen={isModalOpen}
+        handleSubmit={handleSubmit}
+        handleClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 };
