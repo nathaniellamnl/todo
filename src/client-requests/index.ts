@@ -22,7 +22,7 @@ export const updateTodo = async (todo: Todo) => {
   return response.data;
 };
 
-export const deleteTodo = async (id: string) => {
+export const deleteTodo = async (id: number) => {
   const response = await axios.delete(`${BASE_URL}/${id}`);
   return response.data;
 };

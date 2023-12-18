@@ -12,7 +12,7 @@ interface ITodoContext {
   isLoading: boolean;
   addTodo: (todo: Todo) => void;
   editTodo: (todo: Todo) => void;
-  removeTodo: (id: string) => void;
+  removeTodo: (id: number) => void;
 }
 
 export const TodoContext = createContext<ITodoContext>({} as ITodoContext);
@@ -40,7 +40,7 @@ export const TodoProvider = ({ children }: PropsWithChildren) => {
     setTodos(newTodos);
   };
 
-  const removeTodo = (id: string) => {
+  const removeTodo = (id: number) => {
     const newTodos = todos.filter((todo) => todo.id !== id);
     setTodos(newTodos);
   };
