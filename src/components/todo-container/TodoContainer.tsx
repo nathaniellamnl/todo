@@ -29,9 +29,10 @@ const TodoContainer = () => {
         }
       })
       .catch((err) => {
+        console.error(err);
         messageApi.open({
           type: "error",
-          content: "Cannot create a new todo",
+          content: "Error! The todo could not be created",
         });
       })
       .finally(() => messageApi.destroy("loader"));

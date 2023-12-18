@@ -12,6 +12,7 @@ interface ITodoContext {
   isLoading: boolean;
   addTodo: (todo: Todo) => void;
   editTodo: (todo: Todo) => void;
+  removeTodo: (id: string) => void;
 }
 
 export const TodoContext = createContext<ITodoContext>({} as ITodoContext);
@@ -33,15 +34,21 @@ export const TodoProvider = ({ children }: PropsWithChildren) => {
   };
 
   const editTodo = (todo: Todo) => {
-    const clonedTodos = [...todos];
-    const newTodos = clonedTodos.map((clonedTodo) =>
+    const newTodos = todos.map((clonedTodo) =>
       todo.id === clonedTodo.id ? todo : clonedTodo
     );
     setTodos(newTodos);
   };
 
+  const removeTodo = (id: string) => {
+    const newTodos = todos.filter((todo) => todo.id !== id);
+    setTodos(newTodos);
+  };
+
   return (
-    <TodoContext.Provider value={{ todos, isLoading, addTodo, editTodo }}>
+    <TodoContext.Provider
+      value={{ todos, isLoading, addTodo, editTodo, removeTodo }}
+    >
       {children}
     </TodoContext.Provider>
   );

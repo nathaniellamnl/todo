@@ -3,7 +3,7 @@ import { Todo } from "../../types";
 import { List, message } from "antd";
 import { Button } from "antd";
 import TodoModal from "../todo-modal/TodoModal";
-import { updateTodo } from "../../client-requests";
+import { deleteTodo, updateTodo } from "../../client-requests";
 import { useTodos } from "../../hooks/useToDos";
 
 interface TodoItemProps {
@@ -12,7 +12,7 @@ interface TodoItemProps {
 
 const TodoItem = ({ item }: TodoItemProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { editTodo } = useTodos();
+  const { editTodo, removeTodo } = useTodos();
   const [messageApi, contextHolder] = message.useMessage();
 
   const handleSubmit = ({ name }: { name: string }) => {
@@ -34,9 +34,36 @@ const TodoItem = ({ item }: TodoItemProps) => {
         }
       })
       .catch((err) => {
+        console.error(err);
         messageApi.open({
           type: "error",
-          content: "Cannot update the todo",
+          content: "Error! The todo could not be updated",
+        });
+      })
+      .finally(() => messageApi.destroy("loader"));
+  };
+
+  const handleDelete = () => {
+    messageApi.open({
+      type: "loading",
+      content: "Deleting todo..",
+      key: "loader",
+    });
+
+    deleteTodo(item.id)
+      .then((_) => {
+        setIsModalOpen(false);
+        messageApi.open({
+          type: "success",
+          content: "Todo deleted",
+        });
+        removeTodo(item.id);
+      })
+      .catch((err) => {
+        console.error(err);
+        messageApi.open({
+          type: "error",
+          content: "Error! The todo could not be deleted",
         });
       })
       .finally(() => messageApi.destroy("loader"));
@@ -53,7 +80,7 @@ const TodoItem = ({ item }: TodoItemProps) => {
           >
             edit
           </Button>,
-          <Button type="text" key="list-loadmore-more">
+          <Button onClick={handleDelete} type="text" key="list-loadmore-more">
             delete
           </Button>,
         ]}
