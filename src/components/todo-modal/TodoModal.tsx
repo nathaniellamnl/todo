@@ -23,7 +23,7 @@ const TodoModal = ({
   return (
     <>
       <Modal
-        title={type === "update" ? "Edit todo" : "Add todo"}
+        title="Todo"
         open={isModalOpen}
         footer={[
           <Button
