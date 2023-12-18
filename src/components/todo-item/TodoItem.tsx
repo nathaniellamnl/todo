@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Todo } from "../../types";
 import { List, message } from "antd";
 import { Button } from "antd";

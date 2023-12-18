@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { Todo } from "../../types";
 import { Form, Input, Modal } from "antd";
 import { Button } from "antd";

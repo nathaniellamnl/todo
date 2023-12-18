@@ -1,4 +1,3 @@
-import React from "react";
 import { List } from "antd";
 import TodoItem from "../todo-item/TodoItem";
 import { useTodos } from "../../hooks/useToDos";
