@@ -9,8 +9,9 @@ import { getTodos } from "../client-requests";
 
 interface ITodoContext {
   todos: Todo[];
-  addTodo: (todo: Todo) => void;
   isLoading: boolean;
+  addTodo: (todo: Todo) => void;
+  editTodo: (todo: Todo) => void;
 }
 
 export const TodoContext = createContext<ITodoContext>({} as ITodoContext);
@@ -31,8 +32,16 @@ export const TodoProvider = ({ children }: PropsWithChildren) => {
     setTodos([...todos, todo]);
   };
 
+  const editTodo = (todo: Todo) => {
+    const clonedTodos = [...todos];
+    const newTodos = clonedTodos.map((clonedTodo) =>
+      todo.id === clonedTodo.id ? todo : clonedTodo
+    );
+    setTodos(newTodos);
+  };
+
   return (
-    <TodoContext.Provider value={{ todos, addTodo, isLoading }}>
+    <TodoContext.Provider value={{ todos, isLoading, addTodo, editTodo }}>
       {children}
     </TodoContext.Provider>
   );

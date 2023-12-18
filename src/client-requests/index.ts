@@ -8,15 +8,28 @@ export const getTodos = async () => {
     const response = await axios.get<Todo[]>(BASE_URL);
     return response.data;
   } catch (error) {
-    console.error("Error fetching data: ", error);
+    console.error("Error fetching todos: ", error);
   }
 };
 
 export const createTodo = async (name: string) => {
   try {
-    const response = await axios.post<Todo>(BASE_URL, { name });
+    const response = await axios.post<Todo>(BASE_URL, {
+      name,
+    });
     return response.data;
   } catch (error) {
-    console.error("Error fetching data: ", error);
+    console.error("Error creating todo: ", error);
+  }
+};
+
+export const updateTodo = async (todo: Todo) => {
+  try {
+    const response = await axios.put<Todo>(`${BASE_URL}/${todo.id}`, {
+      name: todo.name,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error updating todo: ", error);
   }
 };

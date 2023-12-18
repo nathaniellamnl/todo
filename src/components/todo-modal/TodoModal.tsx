@@ -39,15 +39,15 @@ const TodoModal = ({
         ]}
         onCancel={handleClose}
       >
-        <Form onFinish={handleSubmit}>
+        <Form
+          initialValues={{ name: type === "update" ? item?.name : undefined }}
+          onFinish={handleSubmit}
+        >
           <Form.Item
             name="name"
             rules={[{ required: true, message: "Please input your todo!" }]}
           >
-            <Input
-              value={type === "update" ? item?.name : ""}
-              placeholder="Name of todo"
-            />
+            <Input placeholder="Name of todo" />
           </Form.Item>
           <Button
             className={styles["submit-button"]}

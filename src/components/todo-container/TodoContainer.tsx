@@ -13,9 +13,10 @@ const TodoContainer = () => {
   const handleSubmit = ({ name }: { name: string }) => {
     messageApi.open({
       type: "loading",
-      content: "Action in progress..",
+      content: "Creating todo..",
       key: "loader",
     });
+
     createTodo(name)
       .then((data) => {
         setIsModalOpen(false);
