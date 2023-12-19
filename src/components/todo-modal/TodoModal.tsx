@@ -23,6 +23,7 @@ const TodoModal = ({
   return (
     <>
       <Modal
+        data-testid="todo-modal"
         title="Todo"
         open={isModalOpen}
         footer={[
