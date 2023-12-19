@@ -24,6 +24,9 @@ export const TodoProvider = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     getTodos()
       .then((data) => setTodos(data || []))
+      .catch((_) => {
+        console.error("Error! The todo list could not be fetched");
+      })
       .finally(() => {
         setIsLoading(false);
       });
